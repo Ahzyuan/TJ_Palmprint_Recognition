@@ -1,0 +1,16 @@
+{
+    "dataset": "TJ",
+    "num_class": 600,
+    "img_size": 224,
+
+    "device": "cuda:0",
+    "num_workers": 0,
+
+    "seed":215,
+
+    "epoch":100,
+    "batch_size": 64,
+    "lr":1e-4,
+    "weight_decay":1e-4,
+    "momentum":0.9
+  }
