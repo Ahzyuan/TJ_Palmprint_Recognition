@@ -21,9 +21,9 @@ def test(config, model=None, dataloader=None, test_log_dir=None):
 
     test_acc=cal_acc(config,dataloader.test_loader,model)
     struct_time=localtime()
-    test_res='-'*10 + '{}-{}-{}  {}:{} {} '.format(*struct_time[:5], os.path.basename(weight_path)) + '-'*10 + '\n'
+    test_res='-'*10 + '{}-{}-{} {}:{} {} '.format(*struct_time[:5], os.path.basename(weight_path)) + '-'*10 + '\n'
     test_res+='Top 1_acc: {:.3f}  Top 5_acc: {:.3f}\n'.format(*test_acc)
-    print(test_res)
+    print('\n'+test_res)
     return test_res
 
 if __name__=='__main__':

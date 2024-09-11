@@ -11,14 +11,14 @@
 1. Create a new conda environment with python 3.9
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
     conda create -n tj_palm python=3.9
     ```
 
 2. Install the required packages
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
     conda activate tj_palm
     pip install -r requirements.txt
     ```
@@ -30,11 +30,12 @@
     > More information can be found in [Dataset page](https://cslinzhang.github.io/ContactlessPalm/)
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
 
-    cd Dataset
+    cd Assets/
     gdown https://drive.google.com/uc?id=1KZCXi6zAk5mZ1nQHFdeYHboAII3DOjls
 
+    mkdir ROI
     # In windows, should install winrar first
     rar x ROI.rar ROI
 
@@ -44,7 +45,7 @@
 
 ## 💡 Getting Started
 
-1. Configure the config file: `.../TJ_Palm/Config/hyp_TJ.json`
+1. Configure the config file: `.../TJ_Palmprint_Recognition/Config/hyp_TJ.json`
    
     > `device`: `cpu` or `cuda:0/1/...`, the device you want to use for training and testing  
     > `num_workers`: `0/1/2/...`, the number of workers for data loading. Set 0 if you are in windows system  
@@ -62,33 +63,33 @@
     > If you want to change the ratio, you need to modify `line 16~18` in `dataset_generate.py`
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
     conda activate tj_palm
 
     python dataset_generate.py \
-    -o Dataset/ROI \
+    -o Assets/ROI \
     -d Dataset
     ```
 
 2. Train the model: we use `Resnet18` as the backbone
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
 
     python train.py
     ```
     > Note: while training,
-    > 1. The best model will be saved in `.../TJ_Palm/Results/saved_model/best_<year>-<month>-<day>T<hour>-<minute>.pth`
-    > 2. The terminal output will be saved in `.../TJ_Palm/Results/train_log/train_log_<year>-<month>-<day>T<hour>-<minute>.txt`
-    > 3. The tensorboard log will be saved in `.../TJ_Palm/Results/tb_log`, so you can use the command below to visualize the training process
+    > 1. The best model will be saved in `.../TJ_Palmprint_Recognition/Results/saved_model/best_<year>-<month>-<day>T<hour>-<minute>.pth`
+    > 2. The terminal output will be saved in `.../TJ_Palmprint_Recognition/Results/train_log/train_log_<year>-<month>-<day>T<hour>-<minute>.txt`
+    > 3. The tensorboard log will be saved in `.../TJ_Palmprint_Recognition/Results/tb_log`, so you can use the command below to visualize the training process
     >       ```shell
-    >       tensorboard --logdir=Results/tensorboard
+    >       tensorboard --logdir=Results/tb_log
     >       ```
 
 3. Test the model
 
     ```shell
-    # pwd: .../TJ_Palm
+    # pwd: .../TJ_Palmprint_Recognition
 
     python test.py \
     -c Config/hyp_TJ.json \
@@ -97,16 +98,14 @@
 
 # 🎉 Results
 
+> Top-1 Accuracy: 0.951  
+> Top-5 Accuracy: 0.984  
 
-|Top-1 Accuracy|Top-5 Accuracy|
-|:---:|:---:|
-| 0.951 | 0.984 |
-
-![](Assets/loss.png)
-
-![](Assets/Top1_acc.png)
-
-![](Assets/Top5_acc.png)
+<center>
+    <img src="Assets/loss.png" width="75%" height="75%">
+    <img src="Assets/Top1_acc.png" width="75%" height="75%">
+    <img src="Assets/Top5_acc.png" width="75%" height="75%">
+</center>
 
 # 📃 License
 

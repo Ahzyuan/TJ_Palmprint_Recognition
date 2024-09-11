@@ -3,7 +3,7 @@ from tqdm import tqdm
 from glob import glob
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-o', '--origin_set', type=str, default=os.path.join(sys.path[0],'Dataset','ROI'),help='Path to the roi dataset')   
+parser.add_argument('-o', '--origin_set', type=str, default=os.path.join(sys.path[0],'Assets','ROI'),help='Path to the roi dataset')   
 parser.add_argument('-d', '--destination', type=str, default=os.path.join(sys.path[0],'Dataset'),help='Path to store the final dataset')
 args = parser.parse_args() 
 args.origin_set = os.path.abspath(args.origin_set)

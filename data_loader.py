@@ -1,12 +1,15 @@
-import cv2
+import os,cv2,sys
 from PIL import Image
 from data_augment import clahe
 from torch.utils.data import DataLoader,Dataset
 from torchvision import transforms
 
-train_txt=r'E:\AIL\project\TJ_Palm\Dataset\train.txt'
-val_txt=r'E:\AIL\project\TJ_Palm\Dataset\val.txt'
-test_txt=r'E:\AIL\project\TJ_Palm\Dataset\test.txt'
+train_txt=os.path.join(sys.path[0], 'Dataset', 'train.txt')
+val_txt=os.path.join(sys.path[0], 'Dataset', 'val.txt')
+test_txt=os.path.join(sys.path[0], 'Dataset', 'test.txt')
+assert os.path.exists(train_txt),'train.txt not found'
+assert os.path.exists(val_txt),'val.txt not found'
+assert os.path.exists(test_txt),'test.txt not found'
 
 class TJ_dataset(Dataset):
     def __init__(self,task_txt,config):

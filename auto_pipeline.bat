@@ -1,14 +1,19 @@
 @echo off
 cls
 
-conda activate my_env
+: activate conda env, specify your anaconda path
+set CONDA_PATH=E:\Softwaredata\Anaconda\Scripts 
+call "%CONDA_PATH%\activate.bat" tj_palm
 
-cd Dataset
-rar x ROI.rar ROI
+: prepare data
+mkdir Assets\ROI
+rar x Assets\ROI.rar Assets\ROI
+python dataset_generate.py -o Assets\ROI -d Dataset
 
-python dataset_generate.py -o Dataset/ROI -d Dataset
-
+: train
 python train.py
 
-pause
-exit
+: test
+: python test.py -c Config/hyp_TJ.json -w Results/saved_model/best_<year>-<month>-<day>T<hour>-<minute>.pth
+
+cmd /k
